@@ -1,6 +1,7 @@
 
 public interface Stack {
 
+
     void push(Object item);
     // pre:
     // post: item is added to stack
