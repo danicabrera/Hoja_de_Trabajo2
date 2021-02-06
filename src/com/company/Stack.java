@@ -1,8 +1,6 @@
-import java.util.Vector;
+package com.company;
 
 public interface Stack<E> {
-
-
     void push(E item);
     // pre:
     // post: item is added to stack
@@ -16,7 +14,7 @@ public interface Stack<E> {
     // pre: stack is not empty
     // post: top value (next to be popped) is returned
 
-     boolean empty();
+    boolean empty();
     // post: returns true if and only if the stack is empty
 
     int size();

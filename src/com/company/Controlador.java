@@ -1,5 +1,7 @@
 package com.company;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,6 +9,8 @@ import java.util.Stack;
 
 public class Controlador{
     Stack<Double> pila = new Stack<>();
+    Vista vista = new Vista();
+
     public Controlador() throws FileNotFoundException {
         File file = new File("C:/Users/Acer/Desktop/datos.txt");
         Scanner scan = new Scanner(file);
@@ -14,7 +18,7 @@ public class Controlador{
         while(scan.hasNextLine()){
             String codigo = scan.nextLine();
             String[] splited = codigo.split(" ");
-
+            this.encontrar(splited);
 
         }
 
@@ -24,7 +28,19 @@ public class Controlador{
     public void encontrar(String[] s){
         for (String revision : s) {
             double determinado = this.resolver(revision);
-            pila.push(determinado);
+            if(determinado == 0.1){
+                sumar();
+            } else if (determinado == 0.2){
+                restar();
+            } else if (determinado == 0.3){
+                multiplicar();
+            } else if (determinado == 0.4){
+                dividir();
+            } else if (determinado == 0.7){
+                vista.Error();
+            } else{
+                pila.push(determinado);
+            }
 
         }
 
@@ -55,4 +71,35 @@ public class Controlador{
 
     }
 
+    public void sumar(){
+        double num1 = pila.pop();
+        double num2 = pila.pop();
+        double num3 = num2 + num1;
+        vista.resultado(num3);
+        pila.push(num3);
+    }
+    public void restar(){
+        double num1 = pila.pop();
+        double num2 = pila.pop();
+        double num3 = num2 - num1;
+        vista.resultado(num3);
+        pila.push(num3);
+    }
+
+    public void multiplicar(){
+        double num1 = pila.pop();
+        double num2 = pila.pop();
+        double num3 = num2 * num1;
+        vista.resultado(num3);
+        pila.push(num3);
+    }
+
+    public void dividir(){
+        double num1 = pila.pop();
+        double num2 = pila.pop();
+        double num3 = num2 / num1;
+        pila.push(num3);
+        vista.resultado(num3);
+
+    }
 }
