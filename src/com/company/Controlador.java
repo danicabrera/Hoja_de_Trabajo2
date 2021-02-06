@@ -18,32 +18,35 @@ public class Controlador{
         while(scan.hasNextLine()){
             String codigo = scan.nextLine();
             String[] splited = codigo.split(" ");
-            this.encontrar(splited);
+            double result = encontrar(splited);
+            vista.resultado(result);
 
         }
 
 
     }
 
-    public void encontrar(String[] s){
+    public double encontrar(String[] s){
+        double resultado = 0;
         for (String revision : s) {
             double determinado = this.resolver(revision);
             if(determinado == 0.1){
-                sumar();
+                resultado = sumar();
             } else if (determinado == 0.2){
-                restar();
+                resultado = restar();
             } else if (determinado == 0.3){
-                multiplicar();
+                resultado = multiplicar();
             } else if (determinado == 0.4){
-                dividir();
+                resultado = dividir();
             } else if (determinado == 0.7){
                 vista.Error();
+
             } else{
                 pila.push(determinado);
             }
 
         }
-
+            return resultado;
     }
 
 
@@ -71,35 +74,35 @@ public class Controlador{
 
     }
 
-    public void sumar(){
+    public double sumar(){
         double num1 = pila.pop();
         double num2 = pila.pop();
         double num3 = num2 + num1;
-        vista.resultado(num3);
         pila.push(num3);
+        return num3;
     }
-    public void restar(){
+    public double restar(){
         double num1 = pila.pop();
         double num2 = pila.pop();
         double num3 = num2 - num1;
-        vista.resultado(num3);
         pila.push(num3);
+        return num3;
     }
 
-    public void multiplicar(){
+    public double multiplicar(){
         double num1 = pila.pop();
         double num2 = pila.pop();
         double num3 = num2 * num1;
-        vista.resultado(num3);
         pila.push(num3);
+        return num3;
     }
 
-    public void dividir(){
+    public double dividir(){
         double num1 = pila.pop();
         double num2 = pila.pop();
         double num3 = num2 / num1;
         pila.push(num3);
-        vista.resultado(num3);
+        return num3;
 
     }
 }
