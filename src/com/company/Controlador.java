@@ -7,12 +7,13 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Controlador{
+public class Controlador implements Icalculadora{
     Stack<Double> pila = new Stack<>();
     Vista vista = new Vista();
 
     public Controlador() throws FileNotFoundException {
-        File file = new File("C:/Users/Acer/Desktop/datos.txt");
+        String path = vista.datos();
+        File file = new File(path);
         Scanner scan = new Scanner(file);
 
         while(scan.hasNextLine()){
